@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  db:
+    container_name: "cezedd-dev-pg"
+    image: "mdillon/postgis:11"
+    volumes:
+      - ./pg-init-scripts:/docker-entrypoint-initdb.d
+      - cezedd-dev-pg:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_MULTIPLE_DATABASES=partitioning
+    ports:
+      - "15432:5432"
+volumes:
+  cezedd-dev-pg:
