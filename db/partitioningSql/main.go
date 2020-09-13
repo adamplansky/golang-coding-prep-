@@ -55,6 +55,7 @@ func main() {
 }
 
 func CreatePartitionTable(startTime, endTime, tableName string, year int) {
-	fmt.Printf("CREATE TABLE %s_%d PARTITION %s FOR VALUES FROM created_at >= '%s' TO created_at < '%s'\n", tableName, year, tableName, startTime, endTime)
+	//fmt.Printf("CREATE TABLE %s_%d PARTITION %s FOR VALUES FROM created_at >= '%s' TO created_at < '%s'\n", tableName, year, tableName, startTime, endTime)
+	fmt.Printf("CREATE TABLE %s_%d PARTITION OF %s FOR VALUES FROM ('%s') TO ('%s'); \n", tableName, year, tableName, startTime, endTime)
 	//CREATE TABLE users_a_to_i PARTITION OF users FOR VALUES FROM ('a') TO ('j’);
 }
