@@ -10,8 +10,8 @@ const timeFormat string = "2006-01-02 15:04:05"
 func main() {
 	//var schema = "cezedd"
 	//var table = "event"
-	var schema = ""
-	var table = "products"
+	var schema = "cezedd"
+	var table = "event"
 	var tableName = table
 	if schema != "" {
 		tableName = fmt.Sprintf("%s.%s", schema, tableName)
@@ -36,7 +36,7 @@ func main() {
 		end := endTime.Format(timeFormat)
 		start := startTime.Format(timeFormat)
 
-		CreatePartitionTable(start, end, tableName, year)
+		CreatePartitionTable(start, end, tableName, table, year)
 		//if idx != 0 {
 		//	insertFunction += fmt.Sprintf("ELSIF ( NEW.created_at >= '%s' AND NEW.created_at < '%s' )\n THEN INSERT INTO %s_%d VALUES (NEW.*);\n", start, end, tableName, year)
 		//} else {
@@ -54,8 +54,8 @@ func main() {
 	//fmt.Println(trigger)
 }
 
-func CreatePartitionTable(startTime, endTime, tableName string, year int) {
+func CreatePartitionTable(startTime, endTime, tableName string, table string, year int) {
 	//fmt.Printf("CREATE TABLE %s_%d PARTITION %s FOR VALUES FROM created_at >= '%s' TO created_at < '%s'\n", tableName, year, tableName, startTime, endTime)
-	fmt.Printf("CREATE TABLE %s_%d PARTITION OF %s FOR VALUES FROM ('%s') TO ('%s'); \n", tableName, year, tableName, startTime, endTime)
+	fmt.Printf("CREATE TABLE %s_%d PARTITION OF %s FOR VALUES FROM ('%s') TO ('%s'); \n", tableName, year, table, startTime, endTime)
 	//CREATE TABLE users_a_to_i PARTITION OF users FOR VALUES FROM ('a') TO ('j’);
 }
